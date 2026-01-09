@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = os.path.dirname(__file__)
 OUTPUT_DIR = os.path.join(BASE_DIR, "..", "docs\p")
-# print(OUTPUT_DIR)
+OUTPUT_DIR_HOME = os.path.join(BASE_DIR, "..", "docs")
 
 with open(os.path.join(BASE_DIR, "template.html"), encoding="utf-8") as f:
     template = f.read()
@@ -13,6 +13,7 @@ with open(os.path.join(BASE_DIR, "products.json"), encoding="utf-8") as f:
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+link = "<ul>"
 for p in products:
     html = template
     html = html.replace("{{TITLE}}", p["title"])
@@ -27,6 +28,17 @@ for p in products:
         f.write(html)
 
     print(f"✔ Generated: {p['slug']}.html")
+    link = f"{link} <li><a href='/{p['slug']}.html'>{p['slug']}.html</a></li>"
 
+link = f"{link} </ul>"
+with open(os.path.join(BASE_DIR, "template_home.html"), encoding="utf-8") as f:
+    template_home = f.read()
 
+html = template_home
+html = html.replace("{{DAFTAR_LINK}}", link)
+output_path = os.path.join(OUTPUT_DIR_HOME, "index.html")
+with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+
+    
 
