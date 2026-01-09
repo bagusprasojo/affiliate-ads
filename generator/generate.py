@@ -21,14 +21,31 @@ for p in products:
     html = html.replace("{{IMAGE}}", p["image"])
     html = html.replace("{{AFFILIATE_URL}}", p["affiliate_url"])
 
-    output_path = os.path.join(OUTPUT_DIR, f"{p['slug']}.html")
+    slug = p["title"]
+    slug = slug.replace(" ", "-")
+
+    output_path = os.path.join(OUTPUT_DIR, f"{slug}.html")
     # print(output_path)
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"✔ Generated: {p['slug']}.html")
-    link = f"{link} <li><a href='/produk-pilihan/p/{p['slug']}.html'>{p['slug']}.html</a></li>"
+    print(f"✔ Generated: {slug}.html")
+    description = ""
+    if (p["status1"]):
+        description = f"{description} *{p['status1']}*<br>"
+
+    if (p["status2"]):
+        description = f"{description} *{p['status2']}*<br>"
+
+    if (p["review"]):
+        description = f"{description} *Review : {p['review']}*<br>"
+
+    description = f"{description} <p>{p['description']}</p>"    
+
+    print(description)
+
+    link = f"{link} <li>{description}<a href='/produk-pilihan/p/{slug}.html'>{slug}.html</a></li>"
 
 link = f"{link} </ul>"
 with open(os.path.join(BASE_DIR, "template_home.html"), encoding="utf-8") as f:
