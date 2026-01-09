@@ -28,7 +28,7 @@ for p in products:
         f.write(html)
 
     print(f"✔ Generated: {p['slug']}.html")
-    link = f"{link} <li><a href='/affiliate-ads/p/{p['slug']}.html'>{p['slug']}.html</a></li>"
+    link = f"{link} <li><a href='/produk-pilihan/p/{p['slug']}.html'>{p['slug']}.html</a></li>"
 
 link = f"{link} </ul>"
 with open(os.path.join(BASE_DIR, "template_home.html"), encoding="utf-8") as f:
