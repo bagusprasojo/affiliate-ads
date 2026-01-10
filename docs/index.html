@@ -594,9 +594,8 @@
         if (!digits) return "";
         const amount = Number(digits);
         if (Number.isNaN(amount)) return "";
-        if (amount < 10000) return "1K";
-        if (amount < 100000) return "2K";
-        return "3K";
+        const tier = Math.max(1, Math.ceil(amount / 10000)) * 10;
+        return `${tier}K`;
       };
 
       const parsePriceValue = (value) => {
@@ -651,11 +650,10 @@
 
       const renderStats = () => {
         const total = state.products.length;
-        const latest = state.products[0]?.tanggal;
+        const latest = state.products[state.products.length - 1]?.tanggal;
         stats.innerHTML = `
           <div class="stat-pill">${total} Produk</div>
           <div class="stat-pill">Update: ${formatDate(latest)}</div>
-          <div class="stat-pill">Mode: Dinamis</div>
         `;
       };
 
