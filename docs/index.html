@@ -405,8 +405,22 @@
         .controls {
           grid-template-columns: 1fr;
         }
+        .grid {
+          grid-template-columns: 1fr;
+        }
         .card {
           grid-template-rows: 270px auto;
+        }
+      }
+
+      @media (min-width: 641px) and (max-width: 900px) {
+        .page {
+          padding-left: 7px;
+          padding-right: 7px;
+        }
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
         }
       }
     </style>
@@ -417,8 +431,12 @@
         <div class="eyebrow">Etalase</div>
         <h1>Produk pilihan hari ini.</h1>
         <p class="subhead">
-          Jelajahi koleksi produk terbaru dengan tampilan modern dan responsif.
-          Gunakan pencarian untuk mempercepat, lalu lanjutkan dengan pagination.
+          Temukan rekomendasi produk Shopee yang kami kurasi dengan standar
+          jelas:
+          <strong
+            >review 4.8+, seller Shopee Mall dan Star+, harga terbaik, dan
+            produk terlaris</strong
+          >.
         </p>
         <div class="stats" id="stats"></div>
       </header>
