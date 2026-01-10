@@ -380,8 +380,10 @@
         if (typeof value === "number") {
           return `Rp${new Intl.NumberFormat("id-ID").format(value)}`;
         }
-        const cleaned = String(value).replace(/[^\d]/g, "");
-        if (!cleaned) return String(value);
+        const asString = String(value).trim();
+        if (/[^\d\s.,]/.test(asString)) return asString;
+        const cleaned = asString.replace(/[^\d]/g, "");
+        if (!cleaned) return asString;
         return `Rp${new Intl.NumberFormat("id-ID").format(Number(cleaned))}`;
       };
 
